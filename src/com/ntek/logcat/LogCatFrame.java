@@ -8,14 +8,13 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
-import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
 import com.ntek.MainPanel;
+import com.ntek.daemon.DaemonExecute;
 
 public class LogCatFrame extends JFrame {
 
@@ -79,10 +78,10 @@ public class LogCatFrame extends JFrame {
 
 		// Set the logical style
 		doc.setLogicalStyle(0, mainStyle);
-		
+
 		// Finally, apply the style to the heading
 		doc.setParagraphAttributes(0, 1, heading2Style, false);
-		
+
 		// Set the foreground color and change the font
 		pane.setForeground(Color.black);
 		pane.setFont(new Font("arial", Font.BOLD, 12));
@@ -97,9 +96,7 @@ public class LogCatFrame extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				super.windowClosing(e);
 				LogCatFrame.this.setVisible(false);
-				mainPanel.setFlagLogcat(false);
-				mainPanel.getLogCatThread().stop();
-
+				DaemonExecute.getInstance().interuptAllThreads();
 			}
 		});
 	}

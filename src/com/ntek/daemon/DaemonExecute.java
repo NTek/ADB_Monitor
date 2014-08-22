@@ -22,8 +22,8 @@ public class DaemonExecute {
 				while ((lLine = lBuffer.readLine()) != null) {
 					((DaemonThread) Thread.currentThread()).getDaemonCallback()
 							.response(lLine);
-					if (checkThreadStatus()) {
-						return;
+					if (Thread.interrupted()) {
+						break;
 					}
 				}
 				/** Wait until Process is Finished. */
@@ -46,14 +46,6 @@ public class DaemonExecute {
 	private DaemonExecute() {
 		mThreads = new ArrayList<DaemonThread>();
 		mRuntime = Runtime.getRuntime();
-	}
-
-	private boolean checkThreadStatus() {
-		if (Thread.interrupted()) {
-			mThreads = null;
-			return true;
-		}
-		return false;
 	}
 
 	private String[] getCommandArray() {

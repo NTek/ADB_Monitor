@@ -9,8 +9,6 @@ package com.ntek;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
-import javax.swing.JFrame;
-
 import com.ntek.logcat.LogCatFrame;
 import com.ntek.logcat.Logcat;
 
@@ -20,9 +18,7 @@ import com.ntek.logcat.Logcat;
  */
 public class MainPanel extends javax.swing.JPanel {
 
-	private boolean flagLogcat = false;
 	private LogCatFrame logCatFrame = null;
-	private Thread logCatThread = null;
 
 	/** Creates new form MainPanel */
 	public MainPanel() {
@@ -96,24 +92,8 @@ public class MainPanel extends javax.swing.JPanel {
 
 	@SuppressWarnings("deprecation")
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-
-		if (flagLogcat) {
-			logCatFrame.setVisible(false);
-			logCatThread.stop();
-			flagLogcat = false;
-		} else {
-			new Logcat(logCatFrame);
-			logCatFrame.setVisible(true);
-			flagLogcat = true;
-		}
-	}
-
-	public void setFlagLogcat(boolean arg) {
-		flagLogcat = arg;
-	}
-
-	public Thread getLogCatThread() {
-		return logCatThread;
+		new Logcat(logCatFrame);
+		logCatFrame.setVisible(true);
 	}
 
 	// GEN-BEGIN:variables
