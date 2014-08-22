@@ -9,11 +9,16 @@ public class LogcatBean {
 	private String mMessage = "";
 
 	public LogcatBean(String rawMessage) {
+		mType = String.valueOf(rawMessage.charAt(0));
+		rawMessage = rawMessage.substring(2, rawMessage.length());
 		String[] lRawMessage = rawMessage.trim().replace(" ", "")
-				.replace("(", ":").replace(")", ":").split(":");
+				.replace("(", ":").replace(")", "").split(":");
+		System.out.println("#################################");
 		for (String msg : lRawMessage) {
-			System.out.println(msg);
+			System.out.println(">" + msg + "<");
 		}
+		System.out.println("#################################");
+
 	}
 
 	public String getType() {
