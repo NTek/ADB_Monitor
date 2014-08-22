@@ -100,14 +100,18 @@ public class DaemonExecute {
 
 	/** Run Thread with Specific Command. */
 	public void run() {
+		mThreads.add(new DaemonThread(mRunnable, mCommand, mDaemonCallback));
+	}
+
+	/** Stop Threada. */
+	public void interuptThread(String command) {
 		for (DaemonThread thread : mThreads) {
-			if (thread.equals(mCommand)) {
+			if (thread.equals(command)) {
 				thread.interrupt();
 				mThreads.remove(thread);
 				break;
 			}
 		}
-		mThreads.add(new DaemonThread(mRunnable, mCommand, mDaemonCallback));
 	}
 
 	/** Stop All Threads. */

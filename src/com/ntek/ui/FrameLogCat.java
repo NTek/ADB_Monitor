@@ -1,4 +1,4 @@
-package com.ntek.logcat;
+package com.ntek.ui;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -13,10 +13,10 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
-import com.ntek.MainPanel;
+import com.ntek.daemon.DaemonCommands;
 import com.ntek.daemon.DaemonExecute;
 
-public class LogCatFrame extends JFrame {
+public class FrameLogCat extends JFrame {
 
 	private StyleContext sc = null;
 	private DefaultStyledDocument doc = null;
@@ -29,7 +29,7 @@ public class LogCatFrame extends JFrame {
 	private Style eStyle = null;
 	private Style wStyle = null;
 
-	public LogCatFrame(final MainPanel mainPanel) {
+	public FrameLogCat() {
 		super();
 		this.setSize(300, 300);
 
@@ -95,8 +95,9 @@ public class LogCatFrame extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				super.windowClosing(e);
-				LogCatFrame.this.setVisible(false);
-				DaemonExecute.getInstance().interuptAllThreads();
+				DaemonExecute.getInstance().interuptThread(
+						DaemonCommands.LOGCAT);
+				FrameLogCat.this.setVisible(false);
 			}
 		});
 	}
